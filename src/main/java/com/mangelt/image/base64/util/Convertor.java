@@ -1,9 +1,12 @@
 package com.mangelt.image.base64.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.UUID;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
@@ -59,6 +62,33 @@ public class Convertor {
         base64File = new String(Base64.encodeBase64(bytes), "UTF-8");
         
 		return base64File;
+		
+	}
+	
+	public static void toCopyFromBase64(String base64, File saveIt) throws IOException{
+		
+		byte[] bytes  = Base64.decodeBase64(base64);
+		
+		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+		
+//		String imgName = UUID.randomUUID().toString() + fileType;
+		
+		FileOutputStream fos = new FileOutputStream(saveIt);
+		
+		int data;
+		
+		while((data=bis.read())!=-1)
+		{ 
+			
+			char ch = (char)data;
+			
+			fos.write(ch);
+		
+		}
+		
+		fos.flush();
+		
+		fos.close();
 		
 	}
 	
