@@ -34,4 +34,19 @@
 	    <version>2.4</version>
 	</dependency>
   </dependencies>
+  <build>
+	<plugins>
+		<!-- configure JAR build -->
+		<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-jar-plugin</artifactId>
+		    <version>2.3.1</version>
+		    <configuration>
+		        <excludes>
+		            <exclude>com/mangelt/image/base64/test/**</exclude>
+		        </excludes>
+		    </configuration>
+		</plugin>
+	</plugins>
+   </build>
 </project>

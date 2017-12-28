@@ -1,4 +1,4 @@
-package com.mangelt.image.base64;
+package com.mangelt.image.base64.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
