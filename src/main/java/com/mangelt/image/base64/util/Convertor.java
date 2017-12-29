@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
@@ -14,6 +16,12 @@ import org.apache.commons.io.FilenameUtils;
 public class Convertor {
 	
 	public Convertor(){
+	}
+	
+	protected static final Matcher findMatch(String regex, String input){
+		
+		return Pattern.compile(regex).matcher(input);
+		
 	}
 	
 	public static String toBase64HtmlImageFormFile(File file) throws IOException, Exception{
@@ -90,6 +98,49 @@ public class Convertor {
 		
 		fos.close();
 		
+	}
+	
+	protected static final String regexBase64Html = "data:image\\W{1}(png|jpg);base64,";
+	
+	public static String getTypeFromBase64Html(String base64Html){
+		
+		String type = null;
+		
+		Matcher regex = findMatch(regexBase64Html, base64Html);
+		
+		if(regex.find()){
+			
+//			data:image/png;base64,
+			type = regex.group();
+			
+			type = type.substring(11, 14);
+			
+		}else{
+			
+			throw new NullPointerException("It does not have a image type.");
+			
+		}
+		
+		return type;
+	}  
+	
+	public static String getValueFromBase64Html(String base64Html){
+		
+		String value = null;
+		
+		Matcher regex = findMatch(regexBase64Html, base64Html);
+		
+		if(regex.find()){
+			
+			value = base64Html.replaceAll(regexBase64Html, "");
+			
+		}else{
+			
+			throw new NullPointerException("It does not have a base64 image type.");
+			
+		}
+		
+		return value;
 	}
 	
 }
