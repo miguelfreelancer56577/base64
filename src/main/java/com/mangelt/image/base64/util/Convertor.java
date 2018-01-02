@@ -75,7 +75,7 @@ public class Convertor {
 	
 	public static void toCopyFromBase64(String base64, File saveIt) throws IOException{
 		
-		byte[] bytes  = Base64.decodeBase64(base64);
+		byte[] bytes  = org.apache.commons.codec.binary.Base64.decodeBase64(base64.getBytes());
 		
 		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 		
