@@ -1,4 +1,4 @@
-package com.mangelt.image.base64.test;
+package com.mangelt.image.base64;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,18 +21,20 @@ public class App
 //    	File f = new File("C:\\Users\\vn0x53q\\Pictures\\confirm-shopping-cart-icon-94980.png");
     	File f = new File("C:\\Users\\vn0x53q\\Downloads\\CV.pub");
     	File file = new File("C:\\Users\\vn0x53q\\Downloads\\curriculum.txt");
+    	File inputFile = new File("C:\\Users\\vn0x53q\\Documents\\CV EDUARDO TORRES RENTERIA.pub");
+    	File outputFile = new File("C:\\Users\\vn0x53q\\Desktop\\CV EDUARDO TORRES RENTERIA.txt");
+    	File saveFile = new File("C:\\Users\\vn0x53q\\Downloads\\CV EDUARDO TORRES RENTERIA.pub");
+    	
     	
     	try {
     		
-    		String everything = Convertor.fromFiletoString(file);
+			Convertor.createBase64File(inputFile, outputFile);
+			
+			String getContent = Convertor.fromFiletoString(outputFile);
+			
+			Convertor.toCopyFromBase64(getContent, saveFile);
     		
-			Convertor.toCopyFromBase64(everything, f);
-    		
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (NullPointerException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

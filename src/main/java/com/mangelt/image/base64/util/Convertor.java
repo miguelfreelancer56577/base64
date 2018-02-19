@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -175,5 +177,47 @@ public class Convertor {
 		return everything;
 		
 	}
+	
+	public static Boolean createBase64File(File inputFile, File outputFile){
+		
+		if(inputFile.exists()){
+			
+			try {
+				
+				String contentBase64 = toBase64FormFile(inputFile);
+				
+				createFile(contentBase64, outputFile);
+				
+			} catch (IOException e) {
+				return false;
+			}
+			
+		}
+		
+		return false;
+		
+	}
+	
+	public static Boolean createFile(String content, File outputFile){
+		
+		PrintWriter writer;
+		
+		try {
+			
+			writer = new PrintWriter(outputFile, "UTF-8");
+			
+			writer.println(content);
+			
+			writer.close();
+			
+			return true;
+			
+		} catch (FileNotFoundException e) {
+		} catch (UnsupportedEncodingException e) {
+		}
+		
+		return false;
+		
+	} 
 	
 }
