@@ -1,10 +1,12 @@
 package com.mangelt.image.base64.util;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -141,6 +143,37 @@ public class Convertor {
 		}
 		
 		return value;
+	}
+	
+	public static String fromFiletoString(File input) throws FileNotFoundException{
+		
+		BufferedReader br = new BufferedReader(new FileReader(input));
+		
+		String everything = "";
+		StringBuilder sb = new StringBuilder();
+		
+		try {
+			
+		    String line = br.readLine();
+
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    everything = sb.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+		    try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return everything;
+		
 	}
 	
 }

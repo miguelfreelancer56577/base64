@@ -1,7 +1,9 @@
 package com.mangelt.image.base64.test;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -16,29 +18,15 @@ public class App
     public static void main( String[] args )
     {
     	
-    	File f = new File("C:\\Users\\vn0x53q\\Pictures\\confirm-shopping-cart-icon-94980.png");
-//    	File f = new File("C:\\Users\\vn0x53q\\Documents\\dcnm1.mx.wal-mart.com.zip");
+//    	File f = new File("C:\\Users\\vn0x53q\\Pictures\\confirm-shopping-cart-icon-94980.png");
+    	File f = new File("C:\\Users\\vn0x53q\\Downloads\\CV.pub");
+    	File file = new File("C:\\Users\\vn0x53q\\Downloads\\curriculum.txt");
     	
     	try {
     		
-			
-//			System.out.println(Convertor.toBase64FormFile(f));
-			
-//			System.out.println(Convertor.toBase64HtmlImageFormFile(f));
-			
-//			String imgName = UUID.randomUUID().toString() + ".zip" ;
-//			
-//			File img = new File(imgName);
-//			
-//			Convertor.toCopyFromBase64(Convertor.toBase64FormFile(f), img);
+    		String everything = Convertor.fromFiletoString(file);
     		
-    		String base64 = Convertor.toBase64FormFile(f);
-    		
-    		String base64Html = Convertor.toBase64HtmlImageFormFile(f);
-    		
-    		String type = Convertor.getTypeFromBase64Html("");
-    		
-    		String value = Convertor.getValueFromBase64Html(""); 
+			Convertor.toCopyFromBase64(everything, f);
     		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
